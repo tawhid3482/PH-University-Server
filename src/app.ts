@@ -11,7 +11,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-// application routes
+// application routes refactor
 app.use('/api/v1', router);
 
 
