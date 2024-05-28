@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import cors from 'cors';
 import express, { Application, Request, Response, } from 'express';
 import globalErrorHandler from './app/middleware/globalErrorHandler';
