@@ -1,3 +1,4 @@
+import httpStatus from "http-status";
 import config from "../../config";
 import { AcademicSemester } from "../academicSemester/acdemicSemester.model";
 import { TStudent } from "../student/student.interface";
@@ -5,6 +6,7 @@ import { Student } from "../student/student.model";
 import { TUser } from "./user.interface";
 import { User } from "./user.model";
 import { generateStudentId } from "./user.utils";
+import AppError from "../../errors/AppError";
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
   const userData: Partial<TUser> = {};
@@ -14,7 +16,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   const admissionSemester = await AcademicSemester.findById(payload.admissionSemester).lean().exec();
   
   if (!admissionSemester) {
-    throw new Error('Invalid admission semester');
+    throw new AppError(httpStatus.NOT_FOUND,'Invalid admission semester');
   }
 
   userData.id = await generateStudentId(admissionSemester);
