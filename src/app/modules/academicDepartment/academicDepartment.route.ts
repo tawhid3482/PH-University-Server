@@ -6,7 +6,7 @@ import { AcademicDepartmentController } from './academicDepartment.controller';
 const router = express.Router()
 
 
-router.post('/create-academic-faculty', validationRequest(academicDepartmentValidation.createAcademicDepartmentValidationSchema),
+router.post('/create-academic-department', validationRequest(academicDepartmentValidation.createAcademicDepartmentValidationSchema),
     AcademicDepartmentController.createAcademicDepartment)
 
 
@@ -16,7 +16,7 @@ router.get(
 );
 
 router.patch(
-    '/:facultyId',
+    '/:departmentId',
     validationRequest(
         academicDepartmentValidation.updateAcademicDepartmentValidationSchema,
     ),
