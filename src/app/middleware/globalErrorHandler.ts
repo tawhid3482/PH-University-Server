@@ -1,13 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { NextFunction, Request, Response, } from 'express';
+import { ErrorRequestHandler, NextFunction, Request, Response, } from 'express';
 
-const globalErrorHandler = (
+const globalErrorHandler:ErrorRequestHandler = (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    err: any,
-    req: Request,
-    res: Response,
-    // eslint-disable-next-line no-unused-vars
-    next: NextFunction) => {
+    err,
+    req,
+    res,
+    next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Something went wrong!';
     return res.status(statusCode).json({
