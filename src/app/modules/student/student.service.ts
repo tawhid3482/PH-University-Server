@@ -57,9 +57,15 @@ const deleteStudentFromDB = async (id: string) => {
  
 };
 
+const updateStudentFromDB = async (id: string) => {
+  
+ 
+};
+
 
 export const StudentServices = {
   getAllStudentsFromDB,
   getSingleStudentFromDB,
   deleteStudentFromDB,
+  updateStudentFromDB
 };
