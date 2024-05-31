@@ -3,22 +3,23 @@ import { Student } from './student.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import { User } from '../users/user.model';
+import { TStudent } from './student.interface';
 
 const getAllStudentsFromDB = async () => {
   const result = await Student.find().populate('admissionSemester').populate({
     path: 'academicDepartment',
-    populate:{
-      path:'academicFaculty',
+    populate: {
+      path: 'academicFaculty',
     }
   });
   return result;
 };
 
 const getSingleStudentFromDB = async (id: string) => {
-  const result = await Student.findOne({id}).populate('admissionSemester').populate({
+  const result = await Student.findOne({ id }).populate('admissionSemester').populate({
     path: 'academicDepartment',
-    populate:{
-      path:'academicFaculty',
+    populate: {
+      path: 'academicFaculty',
     }
   });;
   return result;
@@ -26,40 +27,45 @@ const getSingleStudentFromDB = async (id: string) => {
 
 const deleteStudentFromDB = async (id: string) => {
   const session = await mongoose.startSession()
-  try{
-    
-   session.startTransaction()
+  try {
+
+    session.startTransaction()
 
     const deleteStudent = await Student.findOneAndUpdate({ id }, { isDeleted: true },
-      {new:true , session}
+      { new: true, session }
     );
 
-    if(!deleteStudent){
-      throw new AppError(httpStatus.BAD_REQUEST,'Failed to delete student')
+    if (!deleteStudent) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete student')
     }
-    const deletedUser = await User.findOneAndUpdate({id},
+    const deletedUser = await User.findOneAndUpdate({ id },
       { isDeleted: true },
-      {new:true , session}
+      { new: true, session }
     )
-    if(!deletedUser){
-      throw new AppError(httpStatus.BAD_REQUEST,'Failed to delete User')
+    if (!deletedUser) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete User')
     }
 
     await session.commitTransaction()
     await session.endSession()
 
     return deleteStudent;
-  }catch(err){
+  } catch (err) {
 
     await session.abortTransaction()
     await session.endSession()
+    throw new Error('Felid to delete User')
+
   }
- 
+
 };
 
-const updateStudentFromDB = async (id: string) => {
-  
- 
+const updateStudentFromDB = async (id: string, payload: Partial<TStudent>) => {
+
+const {name, guardian, localGuardian,...remainingStudentData}=payload
+
+  const result = await Student.findOneAndUpdate({ id }, payload)
+  return result;
 };
 
 
