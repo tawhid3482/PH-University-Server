@@ -18,9 +18,21 @@ const globalErrorHandler: ErrorRequestHandler = (
         message: 'Something went wrong!'
     }]
 
+    const handleZodError = (err: ZodError) => {
+        const statusCode = 404;
+        return {
+            statusCode,
+            message : 'Zod validation error'
+
+        }
+
+    }
+
+
+
     if (err instanceof ZodError) {
-        statusCode = 404;
-        message = 'ami zod tumi ki'
+
+        const simplifiedError = handleZodError(err)
     };
 
 
