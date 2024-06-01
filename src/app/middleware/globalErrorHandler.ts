@@ -5,6 +5,7 @@ import { ZodError } from 'zod';
 import { TErrorSource } from '../interface/error';
 import config from '../config';
 import handleZodError from '../errors/handleZodError';
+import handleValidationError from '../errors/handleValidationError';
 
 const globalErrorHandler: ErrorRequestHandler = (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,18 +25,17 @@ const globalErrorHandler: ErrorRequestHandler = (
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
         errorSource = simplifiedError?.errorSource
-    }else if(err?.name === 'ValidationError')
-
-
-
-
-
+    } else if (err?.name === 'ValidationError') {
+        const simplifiedError = handleValidationError(err)
+        statusCode = simplifiedError?.statusCode;
+        message = simplifiedError?.message;
+        errorSource = simplifiedError?.errorSource
+    }
 
     return res.status(statusCode).json({
         success: false,
         message,
         errorSource,
-        err,
         stack: config.NODE_ENV === 'development' ? err?.stack : null
 
     })
