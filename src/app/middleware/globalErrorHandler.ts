@@ -6,6 +6,8 @@ import { TErrorSource } from '../interface/error';
 import config from '../config';
 import handleZodError from '../errors/handleZodError';
 import handleValidationError from '../errors/handleValidationError';
+import handleCastError from '../errors/handleCastError';
+import handleDuplicateError from '../errors/handleDuplicateError';
 
 const globalErrorHandler: ErrorRequestHandler = (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,7 +22,6 @@ const globalErrorHandler: ErrorRequestHandler = (
     }]
 
     if (err instanceof ZodError) {
-
         const simplifiedError = handleZodError(err)
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
@@ -30,7 +31,18 @@ const globalErrorHandler: ErrorRequestHandler = (
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
         errorSource = simplifiedError?.errorSource
+    }else if (err?.name === 'CastError') {
+        const simplifiedError = handleCastError(err)
+        statusCode = simplifiedError?.statusCode;
+        message = simplifiedError?.message;
+        errorSource = simplifiedError?.errorSource
     }
+    else if (err?.code === 11000) {
+        const simplifiedError = handleDuplicateError(err);
+        statusCode = simplifiedError?.statusCode;
+        message = simplifiedError?.message;
+        errorSource = simplifiedError?.errorSource;
+      } 
 
     return res.status(statusCode).json({
         success: false,
