@@ -5,8 +5,28 @@ import httpStatus from 'http-status';
 import { User } from '../users/user.model';
 import { TStudent } from './student.interface';
 
-const getAllStudentsFromDB = async () => {
-  const result = await Student.find().populate('admissionSemester').populate({
+const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
+  const queryObj = { ...query }; //copy
+
+  const studentSearchableField = ['email', 'name.firstName', 'presentAddress']
+
+  let searchTerm = '';
+  if (query?.searchTerm) {
+    searchTerm = query?.searchTerm as string;
+  }
+
+  const searchQuery = Student.find({
+    $or: studentSearchableField.map((field) => ({
+      [field]: { $regex: searchTerm, $options: 'i' }
+    }))
+  })
+
+  // filtaring
+  const excludeFields = ['searchTerm']
+  excludeFields.forEach(el => delete queryObj[el])
+
+
+  const result = await searchQuery.find(query).populate('admissionSemester').populate({
     path: 'academicDepartment',
     populate: {
       path: 'academicFaculty',

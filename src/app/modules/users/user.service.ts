@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from "http-status";
 import config from "../../config";
 import { AcademicSemester } from "../academicSemester/acdemicSemester.model";
@@ -48,16 +49,16 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
     await session.endSession()
     return newStudent;
   }
-  catch (err) {
+  catch (err: any) {
     await session.abortTransaction()
     await session.endSession()
-    throw new Error('Felid to create student')
+    throw new Error(err)
   }
 
 
 
 }
-  export const UserServices = {
-    createStudentIntoDB,
-  }
+export const UserServices = {
+  createStudentIntoDB,
+}
 
