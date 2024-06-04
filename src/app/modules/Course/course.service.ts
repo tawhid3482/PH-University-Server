@@ -42,7 +42,6 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
 
   try {
     session.startTransaction();
-
     //step1: basic course info update
     const updatedBasicCourseInfo = await Course.findByIdAndUpdate(
       id,
