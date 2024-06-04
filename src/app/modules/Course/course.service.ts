@@ -42,7 +42,7 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
 
   try {
     session.startTransaction();
-    //step1: basic course info update
+    //step1: basic course info update 
     const updatedBasicCourseInfo = await Course.findByIdAndUpdate(
       id,
       courseRemainingData,
@@ -52,7 +52,6 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
         session,
       },
     );
-
     if (!updatedBasicCourseInfo) {
       throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course');
     }
