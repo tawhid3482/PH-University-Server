@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
-
+import QueryBuilder from '../../builder/QueryBuilder';
+import { Faculty } from './faculty.model';
 import { FacultySearchableFields } from './faculty.constant';
 import { TFaculty } from './faculty.interface';
-import { Faculty } from './faculty.model';
-import QueryBuilder from '../../../builder/QueryBuilder';
-import AppError from '../../../errors/AppError';
-import { User } from '../../users/user.model';
+import AppError from '../../errors/AppError';
+import { User } from '../users/user.model';
+
+
+
 
 const getAllFacultiesFromDB = async (query: Record<string, unknown>) => {
   const facultyQuery = new QueryBuilder(

@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../../utils/catchAsync';
+import catchAsync from '../../utils/catchAsync';
 import { FacultyServices } from './faculty.service';
-import sendResponse from '../../../utils/sendResponse';
+import sendResponse from '../../utils/sendResponse';
+
 
 
 const getSingleFaculty = catchAsync(async (req, res) => {
@@ -22,7 +23,7 @@ const getAllFaculties = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculties are retrieved succesfully',
+    message: 'Faculties are retrieved successfully',
     data: result,
   });
 });
