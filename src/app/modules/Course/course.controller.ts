@@ -70,7 +70,6 @@ const assignFacultiesWithCourse = catchAsync(async (req, res) => {
     courseId,
     faculties,
   );
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
