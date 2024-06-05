@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import { TSemesterRegistration } from './semesterRegistration.interface';
+import { SemesterRegistrationStatus } from './semesterRegistration';
 
 
 
