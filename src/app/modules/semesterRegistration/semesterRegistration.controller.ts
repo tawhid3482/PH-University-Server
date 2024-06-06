@@ -77,6 +77,6 @@ const updateSemesterRegistration = catchAsync(
     createSemesterRegistration,
     getAllSemesterRegistrations,
     getSingleSemesterRegistration,
-    updateSemesterRegistration
+    updateSemesterRegistration,
    
   };

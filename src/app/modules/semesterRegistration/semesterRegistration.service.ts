@@ -117,7 +117,7 @@ const createSemesterRegistrationIntoDB = async (
       );
     }
   
-    // UPCOMING --> ONGOING --> ENDED
+    // UPCOMING --> ONGOING --> ENDED Logic
     if (
       currentSemesterStatus === RegistrationStatus.UPCOMING &&
       requestedStatus === RegistrationStatus.ENDED
