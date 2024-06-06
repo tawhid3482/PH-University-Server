@@ -50,7 +50,7 @@ const moduleRoutes = [
       {
         path: '/offered-courses',
         route: offeredCourseRoutes,
-      },
+      }
 ]
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route))
