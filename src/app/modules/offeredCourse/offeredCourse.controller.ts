@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
+import { OfferedCourseServices } from './offeredCourse.service';
 
 
 const createOfferedCourse = catchAsync(async (req: Request, res: Response) => {
@@ -57,7 +58,7 @@ const updateOfferedCourse = catchAsync(async (req: Request, res: Response) => {
 const deleteOfferedCourseFromDB = catchAsync(
   async (req: Request, res: Response) => {
     const { id } = req.params;
-    const result = await OfferedCourseServices.de(id);
+    const result = await OfferedCourseServices.deleteOfferedCourseFromDB(id);
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,

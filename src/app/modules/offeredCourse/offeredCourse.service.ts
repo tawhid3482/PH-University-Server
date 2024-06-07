@@ -5,6 +5,10 @@ import { OfferedCourse } from './offeredCourse.model';
 import { Faculty } from '../Faculty/faculty.model';
 import AppError from '../../errors/AppError';
 import { SemesterRegistration } from '../semesterRegistration/semesterRegistration.model';
+import { hasTimeConflict } from './offeredCourse.utils';
+import { AcademicFaculty } from '../academicFaculty/academicFaculty.model';
+import { AcademicDepartment } from '../academicDepartment/academicDepartment.model';
+import { Course } from '../Course/course.model';
 
 
 const createOfferedCourseIntoDB = async (payload: TOfferedCourse) => {
