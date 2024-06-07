@@ -14,6 +14,5 @@ const notFound = (
         message:'API NOT FOUND',
         error: ''
     })
-
 }
 export default notFound;
