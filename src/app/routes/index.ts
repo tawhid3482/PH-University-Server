@@ -49,7 +49,7 @@ const moduleRoutes = [
       },
       {
         path: '/offered-courses',
-        route: offeredCourseRoutes,
+        route: offeredCourseRoutes
       }
 ]
 
