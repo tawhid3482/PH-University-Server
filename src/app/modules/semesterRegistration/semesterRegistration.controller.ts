@@ -53,7 +53,6 @@ const createSemesterRegistration = catchAsync(
       });
     },
   );
-
   
 const updateSemesterRegistration = catchAsync(
   async (req: Request, res: Response) => {

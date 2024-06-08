@@ -3,7 +3,6 @@ import validationRequest from '../../middleware/validateRequest';
 import { SemesterRegistrationValidations } from './semesterRegistration.validation';
 import { SemesterRegistrationController } from './semesterRegistration.controller';
 
-
 const router = express.Router();
 
 router.post(

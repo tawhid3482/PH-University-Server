@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { SemesterRegistrationStatus } from './semesterRegistration';
 
-
 const createSemesterRegistrationValidationSchema = z.object({
   body: z.object({
     academicSemester: z.string(),
