@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
 import config from '../../config';
+import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { AuthServices } from './auth.service';
 
@@ -36,7 +36,6 @@ const changePassword = catchAsync(async (req, res) => {
   });
 });
 
-
 const refreshToken = catchAsync(async (req, res) => {
   const { refreshToken } = req.cookies;
   const result = await AuthServices.refreshToken(refreshToken);
@@ -52,5 +51,5 @@ const refreshToken = catchAsync(async (req, res) => {
 export const AuthControllers = {
   loginUser,
   changePassword,
-  refreshToken
+  refreshToken,
 };
